@@ -211,7 +211,7 @@ bindsym $mod+b exec firefox
 # Startup
 
 # Restore wallpaper
-exec --no-startup-id wal -i /home/dirtygeek/Images/Wallpaper/ -a 80
+exec --no-startup-id wal -i /home/dirtygeek/Pictures/Wallpapers/ -a 80
 #bindsym $mod+w exec "wal -i $HOME/Images/Wallpaper -o wal-set"
 
 # CONKY
