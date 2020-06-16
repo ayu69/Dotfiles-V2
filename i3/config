@@ -232,10 +232,10 @@ bindsym $mod+KP_Multiply exec "GTK_THEME=Adwaita:dark qalculate-gtk"
 for_window [class="Qalculate-gtk" instance="qalculate-gtk"] floating enable
 
 #ScreenShot
-bindcode 107 exec rofi-screenshot
+bindcode 107 exec $HOME/dotfiles/scripts/rofi-screenshot.sh
 
 #PowerMenu
-bindsym $mod+F4 exec $HOME/dotfiles/rofi/android/powermenu.sh
+bindsym $mod+F4 exec $HOME/dotfiles/scripts/power-menu.sh
 
 #PAVUCONTROL
 for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
