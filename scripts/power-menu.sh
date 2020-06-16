@@ -7,7 +7,7 @@
 # back to your editor.
 # https://www.reddit.com/r/qtools/comments/amswu9/autoloading_rofi_for_quick_themeing_experience/
 
-options="  lock
+options="  lock
     logout
     sleep
     hibernate
@@ -20,7 +20,7 @@ selection=$(echo -e "${options}" | rofi -dmenu -config $theme -columns 6 -lines 
 echo "This is your selection: $selection"
 
 case "${selection}" in
-    "         lock")
+    "      lock")
         i3lock-fancy-multimonitor -n -p;;
     "       logout")
         i3-msg exit;;
