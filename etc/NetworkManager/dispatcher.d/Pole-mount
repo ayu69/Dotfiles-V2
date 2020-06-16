@@ -1,0 +1,35 @@
+#!/bin/bash
+mount_user='qma'
+mount_pass='**********'
+
+
+SSID_REQUEST=$(nmcli -t -f name,device connection show --active | grep wlp60s0 | cut -d\: -f1)
+SSID='Pole-Formation Admin'
+
+
+if [[ "$SSID_REQUEST" == "$SSID" ]] ; then
+	case "$2" in
+		up)
+			mount -t cifs //10.128.10.5/qma$ /mnt/Pole/QMA -o username=$mount_user,password=$mount_pass,iocharset=utf8,iocharset=utf8,rw,uid=1000,gid=998
+			mount -t cifs //10.128.10.5/fonctionnel$ /mnt/Pole/Fonctionnel -o username=$mount_user,password=$mount_pass,iocharset=utf8,iocharset=utf8,rw,uid=1000,gid=998
+			mount -t cifs //10.128.10.5/Commun /mnt/Pole/Commun -o username=$mount_user,password=$mount_pass,iocharset=utf8,iocharset=utf8,rw,uid=1000,gid=998
+		;;
+  		
+		down)
+			umount -a -t cifs -l
+    		;;
+	esac
+else
+	case "$2" in
+      		up)
+          		umount -a -t cifs -l
+      		;;
+      		down)
+          		umount -a -t cifs -l
+      		;;
+  	esac
+fi
+
+exit $?
+
+
