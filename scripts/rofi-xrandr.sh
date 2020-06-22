@@ -42,7 +42,7 @@ EOF
 external_off() {
 cat <<EOF
 ┌───────┐ ╭┄┄┄┄╮
-│       │ ┆    ┆   External monitor ($ext) disabled
+│       │ ┆    ┆   Disabled All External monitor
 │       │ ╰┄┄┄┄╯
 └───────┘
 EOF
@@ -72,10 +72,10 @@ external_right
 echo -e '\0'
 triple_screen
 echo -e '\0'
-external_on_top
-echo -e '\0'
-internal_off
-echo -e '\0'
+#external_on_top
+#echo -e '\0'
+#internal_off
+#echo -e '\0'
 duplicate
 }
 
@@ -104,8 +104,8 @@ fix_hdmi_audio() {
     fi
 }
 
-element_height=6
-element_count=5
+element_height=5
+element_count=4
 
 res=$(print_menu | rofi \
     -location 0 \
