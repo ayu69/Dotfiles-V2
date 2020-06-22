@@ -170,7 +170,7 @@ client.background       $bg
 bindsym $mod+d exec --no-startup-id "rofi -show run -fullscreen True -lines 3 -line-margin 6 -padding 300 -bw 0"
 
 #Multi monitor
-bindsym $mod+p exec --no-startup-id "sh $HOME/dotfiles/i3/Scripts/rofi-xrandr.sh"
+bindsym $mod+p exec --no-startup-id "sh $HOME/dotfiles/scripts/rofi-xrandr.sh"
 
 #I3lock
 bindsym $mod+l exec i3lock-fancy-multimonitor -n -p

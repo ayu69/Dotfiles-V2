@@ -29,7 +29,7 @@ case "${selection}" in
     "   hibernate")
         i3lock-fancy-multimonitor -n -p && systemctl hibernate;;
     "      reboot")
-        systemctl reboot;;
+        reboot;;
     "      shutdown")
-        systemctl poweroff -i;;
+        poweroff -i;;
 esac

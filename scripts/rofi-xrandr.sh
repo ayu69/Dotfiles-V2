@@ -7,20 +7,15 @@
 #'└─────┘'
 #'┡ '
 
-#internal=eDP1
-#ext=DP3
+internal=eDP1
+ext=DP3
+USBC=DP1
 
-internal=$(xrandr|grep primary|cut -d' ' -f1)
-ext=$(xrandr |grep ' 'connected| grep -v primary | head -n 1| cut -d' ' -f1)
+#internal=$(xrandr|grep primary|cut -d' ' -f1)
+#ext=$(xrandr |grep ' 'connected| grep -v primary | head -n 1| cut -d' ' -f1)
 
 
 external_on_top() {
-#cat <<EOF
-#┌────┬──┐
-#│    │  │           External monitor ($ext)
-#├────┘  │           on top of interal monitor ($internal)
-#└───────┘
-#EOF
 cat <<EOF
 ┏━━━━┱──┐
 ┃    ┃  │           External monitor ($ext)
@@ -28,13 +23,15 @@ cat <<EOF
 └───────┘
 EOF
 }
+triple_screen() {
+cat <<EOF
+ ┏━━━━┓ ┌───────┐ ┏━━━━┓
+ ┃    ┃ │       │ ┃    ┃   External monitor ($ext)
+ ┗━━━━┛ │       │ ┗━━━━┛   right of interal monitor ($internal)
+	└───────┘          Usb-C Left of internal monitor ($internal)
+EOF
+}
 external_right() {
-#cat <<EOF
-#┌───────┐ ┌────┐
-#│       │ │    │   External monitor ($ext)
-#│       │ └────┘   right of interal monitor ($internal)
-#└───────┘
-#EOF
 cat <<EOF
 ┌───────┐ ┏━━━━┓
 │       │ ┃    ┃   External monitor ($ext)
@@ -73,6 +70,8 @@ external_off
 echo -e '\0'
 external_right
 echo -e '\0'
+triple_screen
+echo -e '\0'
 external_on_top
 echo -e '\0'
 internal_off
@@ -81,9 +80,7 @@ duplicate
 }
 
 update_i3() {
-#    herbstclient detect_monitors
     i3-msg restart
-#    setxkbmap us -variant altgr-intl -option compose:menu -option ctrl:nocaps -option compose:ralt -option compose:rctrl
     xset -b
 }
 
@@ -107,10 +104,11 @@ fix_hdmi_audio() {
     fi
 }
 
-element_height=5
-element_count=4
+element_height=6
+element_count=5
 
 res=$(print_menu | rofi \
+    -location 0 \
     -dmenu -sep '\0' -lines "$element_count" \
     -eh "$element_height" -p '' -no-custom \
     -format i)
@@ -121,8 +119,8 @@ fi
 
 case "$res" in
     0)
-        #xrandr --output $ext --off --output $internal --auto --primary
-	xrandr --auto
+	xrandr --output $ext --off
+	xrandr --output $USBC --off
         enable_screensaver
         fix_hdmi_audio force-disable
         ;;
@@ -132,16 +130,24 @@ case "$res" in
         fix_hdmi_audio
         ;;
     2)
-        xrandr --output $internal --auto --primary --output $ext --auto --pos 0x0
+	xrandr --output $USBC --auto --primary    
+	xrandr --output $internal --auto --right-of $USBC
+	xrandr --output $ext --auto --right-of $internal
+	feh --bg-scale "$(< "${HOME}/.cache/wal/wal")"
         disable_screensaver
         fix_hdmi_audio
         ;;
     3)
+        xrandr --output $internal --auto --primary --output $ext --auto --pos 0x0
+        disable_screensaver
+        fix_hdmi_audio
+        ;;
+    4)
         xrandr --output $ext --auto --output $internal --off
         enable_screensaver
         fix_hdmi_audio
         ;;
-    4)  xrandr --output $ext --same-as $internal
+    5)  xrandr --output $ext --same-as $internal
         enable_screensaver
         fix_hdmi_audio
         ;;
