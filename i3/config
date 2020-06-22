@@ -88,6 +88,15 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
+set $monitor_one "eDP1"
+set $monitor_right "DP3"
+set $monitor_left "DP1"
+
+
+workspace 1 output $monitor_one
+workspace 2 output $monitor_left
+workspace 3 output $monitor_right
+
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -167,7 +176,7 @@ client.placeholder      $fg-alt     $bg     $fg  $fg-alt        $fg-alt
 client.background       $bg
 
 # ROFI
-bindsym $mod+d exec --no-startup-id "rofi -show run -fullscreen True -lines 3 -line-margin 6 -padding 300 -bw 0"
+bindsym $mod+d exec --no-startup-id "rofi -show drun -modi drun -fullscreen True -lines 3 -line-margin 6 -padding 300 -bw 0"
 
 #Multi monitor
 bindsym $mod+p exec --no-startup-id "sh $HOME/dotfiles/scripts/rofi-xrandr.sh"
