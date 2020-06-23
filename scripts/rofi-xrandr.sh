@@ -121,38 +121,45 @@ case "$res" in
     0)
 	xrandr --output $ext --off
 	xrandr --output $USBC --off
-        enable_screensaver
+	xrandr --output $internal --auto --primary
+	killall conky
+	update_i3
+	feh --bg-scale "$(< "${HOME}/.cache/wal/wal")"
+	exec "${HOME}/dotfiles/scripts/conky_start.sh"
+        #enable_screensaver
         fix_hdmi_audio force-disable
         ;;
     1)
         xrandr --output $internal --auto --primary --output $ext --auto --right-of $internal
-        disable_screensaver
+        #disable_screensaver
         fix_hdmi_audio
         ;;
     2)
-	xrandr --output $USBC --auto --primary    
-	xrandr --output $internal --auto --right-of $USBC
+	xrandr --output $USBC --auto     
+	xrandr --output $internal --auto --primary --right-of $USBC
 	xrandr --output $ext --auto --right-of $internal
+	killall conky
+	update_i3
 	feh --bg-scale "$(< "${HOME}/.cache/wal/wal")"
-        disable_screensaver
+	exec "${HOME}/dotfiles/scripts/conky_start.sh"
+        #disable_screensaver
         fix_hdmi_audio
         ;;
     3)
         xrandr --output $internal --auto --primary --output $ext --auto --pos 0x0
-        disable_screensaver
+        #disable_screensaver
         fix_hdmi_audio
         ;;
     4)
         xrandr --output $ext --auto --output $internal --off
-        enable_screensaver
+        #enable_screensaver
         fix_hdmi_audio
         ;;
     5)  xrandr --output $ext --same-as $internal
-        enable_screensaver
+        #enable_screensaver
         fix_hdmi_audio
         ;;
     *)
         ;;
 esac
-update_i3
 
