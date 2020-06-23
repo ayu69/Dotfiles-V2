@@ -77,7 +77,7 @@ duplicate
 
 update_i3() {
     i3-msg restart
-    xset -b
+    #xset -b
 }
 
 fix_hdmi_audio() {
