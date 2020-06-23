@@ -72,25 +72,12 @@ external_right
 echo -e '\0'
 triple_screen
 echo -e '\0'
-#external_on_top
-#echo -e '\0'
-#internal_off
-#echo -e '\0'
 duplicate
 }
 
 update_i3() {
     i3-msg restart
     xset -b
-}
-
-disable_screensaver() {
-    xset -dpms
-    xset s off
-}
-
-enable_screensaver() {
-    xset +dpms
 }
 
 fix_hdmi_audio() {
@@ -126,12 +113,10 @@ case "$res" in
 	update_i3
 	feh --bg-scale "$(< "${HOME}/.cache/wal/wal")"
 	exec "${HOME}/dotfiles/scripts/conky_start.sh"
-        #enable_screensaver
         fix_hdmi_audio force-disable
         ;;
     1)
         xrandr --output $internal --auto --primary --output $ext --auto --right-of $internal
-        #disable_screensaver
         fix_hdmi_audio
         ;;
     2)
@@ -142,21 +127,17 @@ case "$res" in
 	update_i3
 	feh --bg-scale "$(< "${HOME}/.cache/wal/wal")"
 	exec "${HOME}/dotfiles/scripts/conky_start.sh"
-        #disable_screensaver
         fix_hdmi_audio
         ;;
     3)
         xrandr --output $internal --auto --primary --output $ext --auto --pos 0x0
-        #disable_screensaver
         fix_hdmi_audio
         ;;
     4)
         xrandr --output $ext --auto --output $internal --off
-        #enable_screensaver
         fix_hdmi_audio
         ;;
     5)  xrandr --output $ext --same-as $internal
-        #enable_screensaver
         fix_hdmi_audio
         ;;
     *)
