@@ -196,8 +196,8 @@ exec --no-startup-id wal -i /home/dirtygeek/Pictures/Wallpapers/ -a 80
 # CONKY
 exec --no-startup-id exec $HOME/dotfiles/scripts/conky_start.sh
 
-# Start Compositing Manager
-exec --no-startup-id picom -b --config /home/dirtygeek/.config/picom/picom.conf
+# PICOM
+exec --no-startup-id picom -b --config /home/dirtygeek/dotfiles/picom/picom.conf
 
 #POLYBAR
 exec_always --no-startup-id "sh $HOME/dotfiles/polybar/launch.sh"
