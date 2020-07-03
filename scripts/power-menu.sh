@@ -28,24 +28,3 @@ elif [[ $chosen = " reboot" ]]; then
 elif [[ $chosen = " shutdown" ]]; then
   /usr/bin/poweroff -i
 fi
-
-#case "${selection}" in
-#    	"      lock")
-#        	i3lock-fancy-multimonitor -n -p
-#		;;
-#    	"       logout")
-#        	i3-msg exit
-#		;;
-#    	"        sleep")
-#        	i3lock-fancy-multimonitor -n -p && systemctl suspend
-#		;;
-#    	"   hibernate")
-#        	i3lock-fancy-multimonitor -n -p && systemctl hibernate
-#		;;
-#    	"      reboot")
-#        	reboot
-#		;;
-#    	"      shutdown")
-#        	poweroff -i
-#		;;
-#esac
